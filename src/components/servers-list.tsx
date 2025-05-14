@@ -127,35 +127,6 @@ export default function ServersList({ data }: Props) {
                                     <TableCell>{server.id}</TableCell>
                                     <TableCell>{server.name}</TableCell>
                                     <TableCell>
-                                        <Snippet
-                                            classNames={{
-                                                copyButton: "text-sm !min-w-6 !w-6 h-6",
-                                                pre: "!ps-1"
-                                            }}
-                                            copyIcon={<CopyIcon size={16} />}
-                                            hideSymbol={true}
-                                            size="sm"
-                                            variant="flat"
-                                        >
-                                            {server.hostnameOrIp}
-                                        </Snippet>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Chip color="default" size="sm" variant="flat">
-                                            {server._count?.accessKeys}
-                                        </Chip>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Chip color="default" size="sm" variant="flat">
-                                            {formatBytes(Number(server.totalDataUsage))}
-                                        </Chip>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Chip color={server.isAvailable ? "success" : "danger"} size="sm" variant="flat">
-                                            {server.isAvailable ? "Available" : "Not Available"}
-                                        </Chip>
-                                    </TableCell>
-                                    <TableCell>
                                         <div className="flex gap-2 justify-center items-center">
                                             <Tooltip
                                                 closeDelay={100}
@@ -216,6 +187,35 @@ export default function ServersList({ data }: Props) {
                                                 </Button>
                                             </Tooltip> */}
                                         </div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip color="default" size="sm" variant="flat">
+                                            {server._count?.accessKeys}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip color="default" size="sm" variant="flat">
+                                            {formatBytes(Number(server.totalDataUsage))}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip color={server.isAvailable ? "success" : "danger"} size="sm" variant="flat">
+                                            {server.isAvailable ? "Available" : "Not Available"}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Snippet
+                                            classNames={{
+                                                copyButton: "text-sm !min-w-6 !w-6 h-6",
+                                                pre: "!ps-1"
+                                            }}
+                                            copyIcon={<CopyIcon size={16} />}
+                                            hideSymbol={true}
+                                            size="sm"
+                                            variant="flat"
+                                        >
+                                            {server.hostnameOrIp}
+                                        </Snippet>
                                     </TableCell>
                                 </TableRow>
                             ))}
