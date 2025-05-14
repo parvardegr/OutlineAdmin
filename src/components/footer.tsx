@@ -15,7 +15,7 @@ export const Footer = () => {
         <footer className="w-full grid place-items-center gap-8 py-3 mt-8">
             <DonationModal disclosure={donationModalDisclosure} />
 
-            <div className="flex gap-6 items-center justify-center">
+            {/* <div className="flex gap-6 items-center justify-center">
                 <Tooltip closeDelay={100} content="Donation">
                     <Link href="#" onPress={donationModalDisclosure.onOpen}>
                         <HeartIconDuotone className="text-default-500" size={24} />
@@ -35,7 +35,7 @@ export const Footer = () => {
                 </Tooltip>
 
                 <ThemeSwitch />
-            </div>
+            </div> */}
 
             <Button
                 isExternal
