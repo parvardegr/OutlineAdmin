@@ -138,7 +138,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
             />
 
             <div className="grid gap-6">
-                <section className="flex justify-between items-center gap-2">
+                <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <section className="flex items-center gap-2">
                         <Tooltip closeDelay={100} color="default" content="Servers" delay={600} size="sm">
                             <Button as={Link} href="/servers" isIconOnly={true} size="sm" variant="light">
@@ -157,7 +157,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                 {/* <AccessKeyServerInfo numberOfKeys={accessKeys.length} server={server} /> */}
 
                 <section className="grid gap-6">
-                    <div className="flex justify-between items-center gap-2">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h1 className="text-xl">🗝️ Access Keys</h1>
 
                         <Button
@@ -172,137 +172,138 @@ export default function ServerAccessKeys({ server, total }: Props) {
                             New
                         </Button>
                     </div>
-
-                    <Table
-                        aria-label="Servers list"
-                        bottomContent={
-                            totalPage > 1 && (
-                                <div className="flex justify-center">
-                                    <Pagination
-                                        initialPage={page}
-                                        total={totalPage}
-                                        variant="light"
-                                        onChange={setPage}
-                                    />
-                                </div>
-                            )
-                        }
-                        color="primary"
-                        isCompact={false}
-                        isHeaderSticky={true}
-                        isStriped={true}
-                        shadow="sm"
-                    >
-                        <TableHeader>
-                            <TableColumn>ID</TableColumn>
-                            <TableColumn>NAME</TableColumn>
-                            <TableColumn align="center">DATA USAGE</TableColumn>
-                            <TableColumn align="center">VALIDITY</TableColumn>
-                            <TableColumn align="center">PREFIX</TableColumn>
-                            <TableColumn align="center">ACTIONS</TableColumn>
-                        </TableHeader>
-                        <TableBody emptyContent={<NoResult />} isLoading={isLoading} loadingContent={<Spinner />}>
-                            {accessKeys.map((accessKey) => (
-                                <TableRow key={accessKey.id}>
-                                    <TableCell>{accessKey.id}</TableCell>
-                                    <TableCell>{accessKey.name}</TableCell>
-                                    <TableCell>
-                                        <div className="flex justify-center gap-2 items-center">
-                                            <span>{formatBytes(Number(accessKey.dataUsage))}</span>
-                                            <span className="text-default-500">of</span>
-                                            {accessKey.dataLimit ? (
-                                                <span>
-                                                    {formatBytes(
-                                                        convertDataLimitToUnit(
-                                                            Number(accessKey.dataLimit),
-                                                            accessKey.dataLimitUnit as DataLimitUnit
-                                                        )
-                                                    )}
-                                                </span>
-                                            ) : (
-                                                <InfinityIcon size={20} />
-                                            )}
-                                        </div>
-                                    </TableCell>
-                                    <TableCell width={160}>
-                                        <AccessKeyValidityChip value={accessKey.expiresAt} />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Chip color={accessKey.prefix ? "success" : "default"} size="sm" variant="flat">
-                                            {accessKey.prefix ? accessKey.prefix : "None"}
-                                        </Chip>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className="flex gap-2 justify-center items-center">
-                                            <Tooltip
-                                                closeDelay={100}
-                                                color="primary"
-                                                content="Show the key"
-                                                delay={600}
-                                                size="sm"
-                                            >
-                                                <Button
+                    <div className="w-full overflow-x-auto">
+                        <Table
+                            aria-label="Servers list"
+                            bottomContent={
+                                totalPage > 1 && (
+                                    <div className="flex justify-center">
+                                        <Pagination
+                                            initialPage={page}
+                                            total={totalPage}
+                                            variant="light"
+                                            onChange={setPage}
+                                        />
+                                    </div>
+                                )
+                            }
+                            color="primary"
+                            isCompact={false}
+                            isHeaderSticky={true}
+                            isStriped={true}
+                            shadow="sm"
+                        >
+                            <TableHeader>
+                                <TableColumn>ID</TableColumn>
+                                <TableColumn>NAME</TableColumn>
+                                <TableColumn align="center">DATA USAGE</TableColumn>
+                                <TableColumn align="center">VALIDITY</TableColumn>
+                                <TableColumn align="center">PREFIX</TableColumn>
+                                <TableColumn align="center">ACTIONS</TableColumn>
+                            </TableHeader>
+                            <TableBody emptyContent={<NoResult />} isLoading={isLoading} loadingContent={<Spinner />}>
+                                {accessKeys.map((accessKey) => (
+                                    <TableRow key={accessKey.id}>
+                                        <TableCell>{accessKey.id}</TableCell>
+                                        <TableCell>{accessKey.name}</TableCell>
+                                        <TableCell>
+                                            <div className="flex justify-center gap-2 items-center">
+                                                <span>{formatBytes(Number(accessKey.dataUsage))}</span>
+                                                <span className="text-default-500">of</span>
+                                                {accessKey.dataLimit ? (
+                                                    <span>
+                                                        {formatBytes(
+                                                            convertDataLimitToUnit(
+                                                                Number(accessKey.dataLimit),
+                                                                accessKey.dataLimitUnit as DataLimitUnit
+                                                            )
+                                                        )}
+                                                    </span>
+                                                ) : (
+                                                    <InfinityIcon size={20} />
+                                                )}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell width={160}>
+                                            <AccessKeyValidityChip value={accessKey.expiresAt} />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Chip color={accessKey.prefix ? "success" : "default"} size="sm" variant="flat">
+                                                {accessKey.prefix ? accessKey.prefix : "None"}
+                                            </Chip>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex gap-2 justify-center items-center">
+                                                <Tooltip
+                                                    closeDelay={100}
                                                     color="primary"
-                                                    isIconOnly={true}
+                                                    content="Show the key"
+                                                    delay={600}
                                                     size="sm"
-                                                    variant="light"
-                                                    onPress={() => {
-                                                        setCurrentAccessKey(accessKey);
-                                                        accessKeyModalDisclosure.onOpen();
-                                                    }}
                                                 >
-                                                    <EyeIcon size={24} />
-                                                </Button>
-                                            </Tooltip>
+                                                    <Button
+                                                        color="primary"
+                                                        isIconOnly={true}
+                                                        size="sm"
+                                                        variant="light"
+                                                        onPress={() => {
+                                                            setCurrentAccessKey(accessKey);
+                                                            accessKeyModalDisclosure.onOpen();
+                                                        }}
+                                                    >
+                                                        <EyeIcon size={24} />
+                                                    </Button>
+                                                </Tooltip>
 
-                                            <Tooltip
-                                                closeDelay={100}
-                                                color="primary"
-                                                content="Edit the key"
-                                                delay={600}
-                                                size="sm"
-                                            >
-                                                <Button
-                                                    as={Link}
+                                                <Tooltip
+                                                    closeDelay={100}
                                                     color="primary"
-                                                    isIconOnly={true}
+                                                    content="Edit the key"
+                                                    delay={600}
                                                     size="sm"
-                                                    variant="light"
-                                                    onPress={() => {
-                                                        setCurrentAccessKey(accessKey);
-                                                        accessKeyFormModalDisclosure.onOpen();
-                                                    }}
                                                 >
-                                                    <EditIcon size={24} />
-                                                </Button>
-                                            </Tooltip>
+                                                    <Button
+                                                        as={Link}
+                                                        color="primary"
+                                                        isIconOnly={true}
+                                                        size="sm"
+                                                        variant="light"
+                                                        onPress={() => {
+                                                            setCurrentAccessKey(accessKey);
+                                                            accessKeyFormModalDisclosure.onOpen();
+                                                        }}
+                                                    >
+                                                        <EditIcon size={24} />
+                                                    </Button>
+                                                </Tooltip>
 
-                                            <Tooltip
-                                                closeDelay={100}
-                                                color="danger"
-                                                content="Remove the key"
-                                                delay={600}
-                                                size="sm"
-                                            >
-                                                <Button
+                                                <Tooltip
+                                                    closeDelay={100}
                                                     color="danger"
-                                                    isIconOnly={true}
+                                                    content="Remove the key"
+                                                    delay={600}
                                                     size="sm"
-                                                    variant="light"
-                                                    onPress={() => {
-                                                        setCurrentAccessKey(accessKey);
-                                                        removeAccessKeyConfirmModalDisclosure.onOpen();
-                                                    }}
                                                 >
-                                                    <DeleteIcon size={24} />
-                                                </Button>
-                                            </Tooltip>
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                                                    <Button
+                                                        color="danger"
+                                                        isIconOnly={true}
+                                                        size="sm"
+                                                        variant="light"
+                                                        onPress={() => {
+                                                            setCurrentAccessKey(accessKey);
+                                                            removeAccessKeyConfirmModalDisclosure.onOpen();
+                                                        }}
+                                                    >
+                                                        <DeleteIcon size={24} />
+                                                    </Button>
+                                                </Tooltip>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </section>
             </div>
         </>

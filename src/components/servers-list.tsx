@@ -82,10 +82,10 @@ export default function ServersList({ data }: Props) {
             <div className="grid gap-4">
                 <h1 className="text-xl">Your Servers</h1>
 
-                <div className="flex justify-between items-center gap-2">
+                <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2">
                     <form onSubmit={searchForm.handleSubmit(handleSearch)}>
                         <Input
-                            className="w-fit"
+                            className="w-full sm:w-72"
                             placeholder="Name or Hostname [+Enter]"
                             startContent={<>🔍</>}
                             variant="faded"
@@ -103,124 +103,125 @@ export default function ServersList({ data }: Props) {
                         Add
                     </Button> */}
                 </div>
-
-                <Table
-                    aria-label="Servers list"
-                    color="primary"
-                    isCompact={false}
-                    isHeaderSticky={true}
-                    isStriped={true}
-                    shadow="sm"
-                >
-                    <TableHeader>
-                        <TableColumn>ID</TableColumn>
-                        <TableColumn>NAME</TableColumn>
-                        <TableColumn>HOSTNAME OR IP</TableColumn>
-                        <TableColumn align="center">NUMBER OF KEYS</TableColumn>
-                        <TableColumn align="center">TOTAL USAGE</TableColumn>
-                        <TableColumn align="center">STATUS</TableColumn>
-                        <TableColumn align="center">ACTIONS</TableColumn>
-                    </TableHeader>
-                    <TableBody emptyContent={<NoResult />}>
-                        {servers.map((server) => (
-                            <TableRow key={server.id}>
-                                <TableCell>{server.id}</TableCell>
-                                <TableCell>{server.name}</TableCell>
-                                <TableCell>
-                                    <Snippet
-                                        classNames={{
-                                            copyButton: "text-sm !min-w-6 !w-6 h-6",
-                                            pre: "!ps-1"
-                                        }}
-                                        copyIcon={<CopyIcon size={16} />}
-                                        hideSymbol={true}
-                                        size="sm"
-                                        variant="flat"
-                                    >
-                                        {server.hostnameOrIp}
-                                    </Snippet>
-                                </TableCell>
-                                <TableCell>
-                                    <Chip color="default" size="sm" variant="flat">
-                                        {server._count?.accessKeys}
-                                    </Chip>
-                                </TableCell>
-                                <TableCell>
-                                    <Chip color="default" size="sm" variant="flat">
-                                        {formatBytes(Number(server.totalDataUsage))}
-                                    </Chip>
-                                </TableCell>
-                                <TableCell>
-                                    <Chip color={server.isAvailable ? "success" : "danger"} size="sm" variant="flat">
-                                        {server.isAvailable ? "Available" : "Not Available"}
-                                    </Chip>
-                                </TableCell>
-                                <TableCell>
-                                    <div className="flex gap-2 justify-center items-center">
-                                        <Tooltip
-                                            closeDelay={100}
-                                            color="primary"
-                                            content="Server keys"
-                                            delay={600}
+                <div className="w-full overflow-x-auto">
+                    <Table
+                        aria-label="Servers list"
+                        color="primary"
+                        isCompact={false}
+                        isHeaderSticky={true}
+                        isStriped={true}
+                        shadow="sm"
+                    >
+                        <TableHeader>
+                            <TableColumn>ID</TableColumn>
+                            <TableColumn>NAME</TableColumn>
+                            <TableColumn>HOSTNAME OR IP</TableColumn>
+                            <TableColumn align="center">NUMBER OF KEYS</TableColumn>
+                            <TableColumn align="center">TOTAL USAGE</TableColumn>
+                            <TableColumn align="center">STATUS</TableColumn>
+                            <TableColumn align="center">ACTIONS</TableColumn>
+                        </TableHeader>
+                        <TableBody emptyContent={<NoResult />}>
+                            {servers.map((server) => (
+                                <TableRow key={server.id}>
+                                    <TableCell>{server.id}</TableCell>
+                                    <TableCell>{server.name}</TableCell>
+                                    <TableCell>
+                                        <Snippet
+                                            classNames={{
+                                                copyButton: "text-sm !min-w-6 !w-6 h-6",
+                                                pre: "!ps-1"
+                                            }}
+                                            copyIcon={<CopyIcon size={16} />}
+                                            hideSymbol={true}
                                             size="sm"
+                                            variant="flat"
                                         >
-                                            <Button
-                                                as={Link}
+                                            {server.hostnameOrIp}
+                                        </Snippet>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip color="default" size="sm" variant="flat">
+                                            {server._count?.accessKeys}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip color="default" size="sm" variant="flat">
+                                            {formatBytes(Number(server.totalDataUsage))}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip color={server.isAvailable ? "success" : "danger"} size="sm" variant="flat">
+                                            {server.isAvailable ? "Available" : "Not Available"}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <div className="flex gap-2 justify-center items-center">
+                                            <Tooltip
+                                                closeDelay={100}
                                                 color="primary"
-                                                href={`/servers/${server.id}/access-keys`}
-                                                isIconOnly={true}
+                                                content="Server keys"
+                                                delay={600}
                                                 size="sm"
-                                                variant="light"
                                             >
-                                                <KeyIcon size={24} />
-                                            </Button>
-                                        </Tooltip>
+                                                <Button
+                                                    as={Link}
+                                                    color="primary"
+                                                    href={`/servers/${server.id}/access-keys`}
+                                                    isIconOnly={true}
+                                                    size="sm"
+                                                    variant="light"
+                                                >
+                                                    <KeyIcon size={24} />
+                                                </Button>
+                                            </Tooltip>
 
-                                        {/* <Tooltip
-                                            closeDelay={100}
-                                            color="primary"
-                                            content="Server settings"
-                                            delay={600}
-                                            size="sm"
-                                        >
-                                            <Button
-                                                as={Link}
+                                            {/* <Tooltip
+                                                closeDelay={100}
                                                 color="primary"
-                                                href={`/servers/${server.id}/settings`}
-                                                isIconOnly={true}
+                                                content="Server settings"
+                                                delay={600}
                                                 size="sm"
-                                                variant="light"
                                             >
-                                                <SettingsIcon size={24} />
-                                            </Button>
-                                        </Tooltip> */}
+                                                <Button
+                                                    as={Link}
+                                                    color="primary"
+                                                    href={`/servers/${server.id}/settings`}
+                                                    isIconOnly={true}
+                                                    size="sm"
+                                                    variant="light"
+                                                >
+                                                    <SettingsIcon size={24} />
+                                                </Button>
+                                            </Tooltip> */}
 
-                                        {/* <Tooltip
-                                            closeDelay={100}
-                                            color="danger"
-                                            content="Remove the server"
-                                            delay={600}
-                                            size="sm"
-                                        >
-                                            <Button
+                                            {/* <Tooltip
+                                                closeDelay={100}
                                                 color="danger"
-                                                isIconOnly={true}
+                                                content="Remove the server"
+                                                delay={600}
                                                 size="sm"
-                                                variant="light"
-                                                onPress={() => {
-                                                    setServerToRemove(server.id);
-                                                    removeServerConfirmModalDisclosure.onOpen();
-                                                }}
                                             >
-                                                <DeleteIcon size={24} />
-                                            </Button>
-                                        </Tooltip> */}
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                                                <Button
+                                                    color="danger"
+                                                    isIconOnly={true}
+                                                    size="sm"
+                                                    variant="light"
+                                                    onPress={() => {
+                                                        setServerToRemove(server.id);
+                                                        removeServerConfirmModalDisclosure.onOpen();
+                                                    }}
+                                                >
+                                                    <DeleteIcon size={24} />
+                                                </Button>
+                                            </Tooltip> */}
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
         </>
     );
