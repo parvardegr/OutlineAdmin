@@ -176,7 +176,7 @@ export default function ServersList({ data }: Props) {
                                             </Button>
                                         </Tooltip>
 
-                                        <Tooltip
+                                        {/* <Tooltip
                                             closeDelay={100}
                                             color="primary"
                                             content="Server settings"
@@ -193,9 +193,9 @@ export default function ServersList({ data }: Props) {
                                             >
                                                 <SettingsIcon size={24} />
                                             </Button>
-                                        </Tooltip>
+                                        </Tooltip> */}
 
-                                        <Tooltip
+                                        {/* <Tooltip
                                             closeDelay={100}
                                             color="danger"
                                             content="Remove the server"
@@ -214,7 +214,7 @@ export default function ServersList({ data }: Props) {
                                             >
                                                 <DeleteIcon size={24} />
                                             </Button>
-                                        </Tooltip>
+                                        </Tooltip> */}
                                     </div>
                                 </TableCell>
                             </TableRow>
