@@ -93,7 +93,7 @@ export default function ServersList({ data }: Props) {
                         />
                     </form>
 
-                    <Button
+                    {/* <Button
                         as={Link}
                         color="primary"
                         href="/servers/add"
@@ -101,7 +101,7 @@ export default function ServersList({ data }: Props) {
                         variant="shadow"
                     >
                         Add
-                    </Button>
+                    </Button> */}
                 </div>
 
                 <Table
