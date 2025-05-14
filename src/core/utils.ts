@@ -9,7 +9,7 @@ export const formatAsDuration = (start: Date, end: Date): string => {
 
     const duration = moment.duration(momentEnd.diff(momentStart));
 
-    const days = duration.days();
+    const days = Math.floor(duration.asDays());
     const hours = duration.hours();
     const minutes = duration.minutes();
     const seconds = duration.seconds();
