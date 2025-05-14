@@ -25,11 +25,11 @@ const navItems = [
         pathName: "/servers",
         icon: <ServersIcon size={24} />
     },
-    {
-        label: "Dynamic Access Keys",
-        pathName: "/dynamic-access-keys",
-        icon: <DynamicAccessKeyIcon size={24} />
-    }
+    // {
+    //     label: "Dynamic Access Keys",
+    //     pathName: "/dynamic-access-keys",
+    //     icon: <DynamicAccessKeyIcon size={24} />
+    // }
 ];
 
 interface Props {
