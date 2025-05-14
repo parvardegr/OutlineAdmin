@@ -149,12 +149,12 @@ export default function ServerAccessKeys({ server, total }: Props) {
                         <h1 className="text-xl">{server.name}</h1>
                     </section>
 
-                    <Button as={Link} color="primary" href={`/servers/${server.id}/settings`} variant="light">
+                    {/* <Button as={Link} color="primary" href={`/servers/${server.id}/settings`} variant="light">
                         Settings
-                    </Button>
+                    </Button> */}
                 </section>
 
-                <AccessKeyServerInfo numberOfKeys={accessKeys.length} server={server} />
+                {/* <AccessKeyServerInfo numberOfKeys={accessKeys.length} server={server} /> */}
 
                 <section className="grid gap-6">
                     <div className="flex justify-between items-center gap-2">
