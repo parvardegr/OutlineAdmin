@@ -119,7 +119,7 @@ export default function ServersList({ data }: Props) {
                             <TableColumn align="center">NUMBER OF KEYS</TableColumn>
                             <TableColumn align="center">TOTAL USAGE</TableColumn>
                             <TableColumn align="center">STATUS</TableColumn>
-                            <TableColumn>HOSTNAME OR IP</TableColumn>
+                            {/* <TableColumn>HOSTNAME OR IP</TableColumn> */}
                         </TableHeader>
                         <TableBody emptyContent={<NoResult />}>
                             {servers.map((server) => (
@@ -203,7 +203,7 @@ export default function ServersList({ data }: Props) {
                                             {server.isAvailable ? "Available" : "Not Available"}
                                         </Chip>
                                     </TableCell>
-                                    <TableCell>
+                                    {/* <TableCell>
                                         <Snippet
                                             classNames={{
                                                 copyButton: "text-sm !min-w-6 !w-6 h-6",
@@ -216,7 +216,7 @@ export default function ServersList({ data }: Props) {
                                         >
                                             {server.hostnameOrIp}
                                         </Snippet>
-                                    </TableCell>
+                                    </TableCell> */}
                                 </TableRow>
                             ))}
                         </TableBody>
