@@ -1,2 +1,2 @@
 #!/bin/bash
-docker buildx build -t outline-admin .
+docker buildx build -t outline-admin .
