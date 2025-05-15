@@ -115,11 +115,11 @@ export default function ServersList({ data }: Props) {
                         <TableHeader>
                             <TableColumn>ID</TableColumn>
                             <TableColumn>NAME</TableColumn>
-                            <TableColumn>HOSTNAME OR IP</TableColumn>
+                            <TableColumn align="center">ACTIONS</TableColumn>
                             <TableColumn align="center">NUMBER OF KEYS</TableColumn>
                             <TableColumn align="center">TOTAL USAGE</TableColumn>
                             <TableColumn align="center">STATUS</TableColumn>
-                            <TableColumn align="center">ACTIONS</TableColumn>
+                            <TableColumn>HOSTNAME OR IP</TableColumn>
                         </TableHeader>
                         <TableBody emptyContent={<NoResult />}>
                             {servers.map((server) => (

@@ -196,42 +196,16 @@ export default function ServerAccessKeys({ server, total }: Props) {
                             <TableHeader>
                                 <TableColumn>ID</TableColumn>
                                 <TableColumn>NAME</TableColumn>
+                                <TableColumn align="center">ACTIONS</TableColumn>
                                 <TableColumn align="center">DATA USAGE</TableColumn>
                                 <TableColumn align="center">VALIDITY</TableColumn>
                                 <TableColumn align="center">PREFIX</TableColumn>
-                                <TableColumn align="center">ACTIONS</TableColumn>
                             </TableHeader>
                             <TableBody emptyContent={<NoResult />} isLoading={isLoading} loadingContent={<Spinner />}>
                                 {accessKeys.map((accessKey) => (
                                     <TableRow key={accessKey.id}>
                                         <TableCell>{accessKey.id}</TableCell>
                                         <TableCell>{accessKey.name}</TableCell>
-                                        <TableCell>
-                                            <div className="flex justify-center gap-2 items-center">
-                                                <span>{formatBytes(Number(accessKey.dataUsage))}</span>
-                                                <span className="text-default-500">of</span>
-                                                {accessKey.dataLimit ? (
-                                                    <span>
-                                                        {formatBytes(
-                                                            convertDataLimitToUnit(
-                                                                Number(accessKey.dataLimit),
-                                                                accessKey.dataLimitUnit as DataLimitUnit
-                                                            )
-                                                        )}
-                                                    </span>
-                                                ) : (
-                                                    <InfinityIcon size={20} />
-                                                )}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell width={160}>
-                                            <AccessKeyValidityChip value={accessKey.expiresAt} />
-                                        </TableCell>
-                                        <TableCell>
-                                            <Chip color={accessKey.prefix ? "success" : "default"} size="sm" variant="flat">
-                                                {accessKey.prefix ? accessKey.prefix : "None"}
-                                            </Chip>
-                                        </TableCell>
                                         <TableCell>
                                             <div className="flex gap-2 justify-center items-center">
                                                 <Tooltip
@@ -298,6 +272,32 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                                     </Button>
                                                 </Tooltip>
                                             </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex justify-center gap-2 items-center">
+                                                <span>{formatBytes(Number(accessKey.dataUsage))}</span>
+                                                <span className="text-default-500">of</span>
+                                                {accessKey.dataLimit ? (
+                                                    <span>
+                                                        {formatBytes(
+                                                            convertDataLimitToUnit(
+                                                                Number(accessKey.dataLimit),
+                                                                accessKey.dataLimitUnit as DataLimitUnit
+                                                            )
+                                                        )}
+                                                    </span>
+                                                ) : (
+                                                    <InfinityIcon size={20} />
+                                                )}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell width={160}>
+                                            <AccessKeyValidityChip value={accessKey.expiresAt} />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Chip color={accessKey.prefix ? "success" : "default"} size="sm" variant="flat">
+                                                {accessKey.prefix ? accessKey.prefix : "None"}
+                                            </Chip>
                                         </TableCell>
                                     </TableRow>
                                 ))}
