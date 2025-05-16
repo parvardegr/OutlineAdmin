@@ -199,7 +199,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                 <TableColumn align="center">ACTIONS</TableColumn>
                                 <TableColumn align="center">DATA USAGE</TableColumn>
                                 <TableColumn align="center">VALIDITY</TableColumn>
-                                <TableColumn align="center">PREFIX</TableColumn>
+                                {/* <TableColumn align="center">PREFIX</TableColumn> */}
                             </TableHeader>
                             <TableBody emptyContent={<NoResult />} isLoading={isLoading} loadingContent={<Spinner />}>
                                 {accessKeys.map((accessKey) => (
@@ -294,11 +294,11 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                         <TableCell width={160}>
                                             <AccessKeyValidityChip value={accessKey.expiresAt} />
                                         </TableCell>
-                                        <TableCell>
+                                        {/* <TableCell>
                                             <Chip color={accessKey.prefix ? "success" : "default"} size="sm" variant="flat">
                                                 {accessKey.prefix ? accessKey.prefix : "None"}
                                             </Chip>
-                                        </TableCell>
+                                        </TableCell> */}
                                     </TableRow>
                                 ))}
                             </TableBody>
